@@ -59,6 +59,9 @@ st.markdown('<div class="animated-header">WAVE 2.0 Result Card</div>', unsafe_al
 data_file = 'result.xlsx'
 data = load_data(data_file)
 
+# Check and display the column names to debug
+# st.write("Data columns:", data.columns.tolist())
+
 # User input for passcode verification
 user_input = st.text_input("Enter your 4-character passcode (letters and numbers):")
 
@@ -68,20 +71,23 @@ if user_input and re.match("^[A-Za-z0-9]{4}$", user_input):
         row = data[data['code'] == user_input]
         st.markdown('<div class="result-text">Here are your results:</div>', unsafe_allow_html=True)
         # Extract the values from the respective columns without displaying the column names
-        one = row['p1'].values[0]
-        two = row['p2'].values[0]
-        three = row['p3'].values[0]
+        try:
+            one = row['p1'].values[0]
+            two = row['p2'].values[0]
+            three = row['p3'].values[0]
 
-        # Calculate the total marks and percentage
-        total_marks = one + two + three
-        percentage = (total_marks / 150) * 100
+            # Calculate the total marks and percentage
+            total_marks = one + two + three
+            percentage = (total_marks / 150) * 100
 
-        # Display the results with increased font size
-        st.markdown(f'<div class="result-text">1st round: {one}</div>', unsafe_allow_html=True)
-        st.markdown(f'<div class="result-text">2nd round: {two}</div>', unsafe_allow_html=True)
-        st.markdown(f'<div class="result-text">3rd round: {three}</div>', unsafe_allow_html=True)
-        # st.markdown(f'<div class="result-text">Total Marks: {total_marks}</div>', unsafe_allow_html=True)
-        st.markdown(f'<div class="result-text">Percentage: {percentage:.2f}%</div>', unsafe_allow_html=True)
+            # Display the results with increased font size
+            st.markdown(f'<div class="result-text">1st round: {one}</div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="result-text">2nd round: {two}</div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="result-text">3rd round: {three}</div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="result-text">Total Marks: {total_marks}</div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="result-text">Percentage: {percentage:.2f}%</div>', unsafe_allow_html=True)
+        except KeyError as e:
+            st.write(f"Error: {e}. Please check the column names in your Excel file.")
     else:
         st.write("Invalid passcode. Please try again.")
 elif user_input:
@@ -89,8 +95,6 @@ elif user_input:
 
 # Countdown timer for 12:00 PM, 2nd July 2024
 end_time = datetime(2024, 7, 2, 12, 0, 0)
-st.write("\n")
-st.write("\n")
 st.subheader("⏳ Hackathon Countdown")
 timer_placeholder = st.empty()
 
