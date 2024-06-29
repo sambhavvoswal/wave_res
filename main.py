@@ -53,7 +53,7 @@ st.markdown(
     """, unsafe_allow_html=True
 )
 
-st.markdown('<div class="animated-header">WAVE 2.0 Result Card</div>', unsafe_allow_html=True)
+st.markdown('<div class="animated-header">🌊 WAVE 2.0 Result Card 🌊</div>', unsafe_allow_html=True)
 
 # Load the Excel data
 data_file = 'result.xlsx'
