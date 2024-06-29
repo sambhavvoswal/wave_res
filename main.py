@@ -49,6 +49,20 @@ st.markdown(
         font-size: 1.5em;
         margin: 10px 0;
     }
+
+    .centered-countdown {
+        font-size: 2em;
+        text-align: center;
+        color: #FF5733;
+        margin-top: 20px;
+    }
+
+    .countdown-header {
+        font-size: 2em;
+        text-align: center;
+        font-weight: bold;
+        color: #007BFF;
+    }
     </style>
     """, unsafe_allow_html=True
 )
@@ -58,9 +72,6 @@ st.markdown('<div class="animated-header">🌊 WAVE 2.0 Result Card 🌊</div>',
 # Load the Excel data
 data_file = 'result.xlsx'
 data = load_data(data_file)
-
-# Check and display the column names to debug
-# st.write("Data columns:", data.columns.tolist())
 
 # User input for passcode verification
 user_input = st.text_input("Enter your 4-character passcode (letters and numbers):")
@@ -95,13 +106,11 @@ elif user_input:
 
 # Countdown timer for 12:00 PM, 2nd July 2024
 end_time = datetime(2024, 7, 2, 12, 0, 0)
-st.write("\n")
-st.write("\n")
-st.subheader("⏳ Hackathon Countdown ⏳")
+st.markdown('<div class="countdown-header">⏳ Hackathon Countdown ⏳</div>', unsafe_allow_html=True)
 timer_placeholder = st.empty()
 
 while datetime.now() < end_time:
-    timer_placeholder.markdown(f"<h2>{countdown_timer(end_time)}</h2>", unsafe_allow_html=True)
+    timer_placeholder.markdown(f'<div class="centered-countdown">{countdown_timer(end_time)}</div>', unsafe_allow_html=True)
     time.sleep(1)
 
 # Add footer
