@@ -111,7 +111,7 @@ st.markdown('<div class="countdown-header">⏳ Hackathon Countdown ⏳</div>', u
 timer_placeholder = st.empty()
 
 while datetime.now() < end_time:
-    timer_placeholder.markdown(f'<b><div class="centered-countdown">{countdown_timer(end_time)}</div></b>', unsafe_allow_html=True)
+    timer_placeholder.markdown(f'<b><strong><div class="centered-countdown">{countdown_timer(end_time)}</div></strong></b>', unsafe_allow_html=True)
     time.sleep(1)
 
 # Add footer
