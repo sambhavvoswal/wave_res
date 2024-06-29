@@ -44,6 +44,11 @@ st.markdown(
         background-color: #f1f1f1;
         text-align: center;
     }
+
+    .result-text {
+        font-size: 1.5em;
+        margin: 10px 0;
+    }
     </style>
     """, unsafe_allow_html=True
 )
@@ -55,21 +60,37 @@ data_file = 'result.xlsx'
 data = load_data(data_file)
 
 # User input for passcode verification
-user_input = st.text_input("Enter your 4-character passcode (only letters):")
+user_input = st.text_input("Enter your 4-character passcode (letters and numbers):")
 
-# Validate that the passcode is exactly 4 characters long and contains only letters
+# Validate that the passcode is exactly 4 characters long and contains only letters and numbers
 if user_input and re.match("^[A-Za-z0-9]{4}$", user_input):
     if user_input in data['code'].values:
         row = data[data['code'] == user_input]
-        st.write("Here are your results:")
-        st.write(row[['1p1', '1p2', '1p3', '1p4', '1p5']])
+        st.markdown('<div class="result-text">Here are your results:</div>', unsafe_allow_html=True)
+        # Extract the values from the respective columns without displaying the column names
+        one = row['p1'].values[0]
+        two = row['p2'].values[0]
+        three = row['p3'].values[0]
+
+        # Calculate the total marks and percentage
+        total_marks = one + two + three
+        percentage = (total_marks / 150) * 100
+
+        # Display the results with increased font size
+        st.markdown(f'<div class="result-text">1st round: {one}</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="result-text">2nd round: {two}</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="result-text">3rd round: {three}</div>', unsafe_allow_html=True)
+        # st.markdown(f'<div class="result-text">Total Marks: {total_marks}</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="result-text">Percentage: {percentage:.2f}%</div>', unsafe_allow_html=True)
     else:
         st.write("Invalid passcode. Please try again.")
 elif user_input:
-    st.write("Passcode must be exactly 4 characters long and appropiatee. Please try again.")
+    st.write("Passcode must be exactly 4 characters long and contain only letters and numbers. Please try again.")
 
 # Countdown timer for 12:00 PM, 2nd July 2024
 end_time = datetime(2024, 7, 2, 12, 0, 0)
+st.write("\n")
+st.write("\n")
 st.subheader("⏳ Hackathon Countdown")
 timer_placeholder = st.empty()
 
