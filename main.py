@@ -75,7 +75,7 @@ data_file = 'result.xlsx'
 data = load_data(data_file)
 
 # User input for passcode verification
-user_input = st.text_input("Enter your 4-character passcode (letters and numbers):")
+user_input = st.text_input("Enter your team-code:")
 
 # Validate that the passcode is exactly 4 characters long and contains only letters and numbers
 if user_input and re.match("^[A-Za-z0-9]{4}$", user_input):
