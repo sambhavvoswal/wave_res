@@ -19,7 +19,7 @@ def countdown_timer(target_time):
     return f"{days}d {hours:02d}:{minutes:02d}:{seconds:02d}"
 
 # Set up Streamlit page
-st.set_page_config(page_title="WAVE 2.0 Result Card", layout="centered")
+st.set_page_config(page_title="🌊 WAVE 2.0 Result Card 🌊", layout="centered")
 st.markdown(
     """
     <style>
@@ -95,7 +95,9 @@ elif user_input:
 
 # Countdown timer for 12:00 PM, 2nd July 2024
 end_time = datetime(2024, 7, 2, 12, 0, 0)
-st.subheader("⏳ Hackathon Countdown")
+st.write("\n")
+st.write("\n")
+st.subheader("⏳ Hackathon Countdown ⏳")
 timer_placeholder = st.empty()
 
 while datetime.now() < end_time:
