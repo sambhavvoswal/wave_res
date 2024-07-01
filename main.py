@@ -106,7 +106,7 @@ elif user_input:
     st.write("Passcode must be exactly 4 characters long and contain only letters and numbers. Please try again.")
 
 # Countdown timer for 12:00 PM, 2nd July 2024
-end_time = datetime(2024, 7, 2, 12, 0, 0)
+end_time = datetime(2024, 7, 2, 8, 0, 0)
 st.markdown('<div class="countdown-header">⏳ Hackathon Countdown ⏳</div>', unsafe_allow_html=True)
 timer_placeholder = st.empty()
 
